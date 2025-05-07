@@ -1,0 +1,734 @@
+/* 基础样式设置 */
+:root {
+    --primary-color: #0f4c81;    /* 深蓝色作为主色调，与物流航运相关 */
+    --secondary-color: #e36c0a;  /* 橙色作为辅助色，与瑞尔物流相似 */
+    --accent-color: #1a7cbd;     /* 亮蓝色作为强调色 */
+    --dark-color: #333;
+    --light-color: #f7f9fc;      /* 更淡一些的背景色 */
+    --danger-color: #dc3545;
+    --success-color: #28a745;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: var(--dark-color);
+    background-color: #fff;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    width: 100%;
+}
+
+/* 通用样式 */
+a {
+    text-decoration: none;
+    color: var(--dark-color);
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    margin-right: 10px;
+}
+
+.btn.primary {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.btn.secondary {
+    background-color: transparent;
+    border: 2px solid var(--secondary-color);
+    color: var(--secondary-color);
+}
+
+.btn.primary:hover {
+    background-color: #083a66; /* 更深的蓝色 */
+}
+
+.btn.secondary:hover {
+    background-color: var(--secondary-color);
+    color: #fff;
+}
+
+section {
+    padding: 80px 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 20px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+/* 头部样式 */
+header {
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 10px 0;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    flex-wrap: wrap; /* 允许在移动设备上换行 */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 250px; /* 原来50px的5倍 */
+    width: auto;
+    max-width: 100%;
+    background: transparent;
+}
+
+nav .menu {
+    display: flex;
+}
+
+nav .menu li {
+    margin-left: 25px;
+}
+
+nav .menu a {
+    font-weight: 500;
+    padding: 10px 0;
+    position: relative;
+}
+
+nav .menu a:hover,
+nav .menu a.active {
+    color: var(--primary-color);
+}
+
+nav .menu a:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--secondary-color);
+    transition: width 0.3s ease;
+}
+
+nav .menu a:hover:after,
+nav .menu a.active:after {
+    width: 100%;
+}
+
+.language-switch {
+    display: flex;
+}
+
+.language-switch button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.language-switch button.active {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+/* 英文和泰文语言切换 */
+.en, .th {
+    transition: display 0.3s ease;
+}
+
+/* 英雄区域轮播样式 */
+.hero-slider {
+    margin-top: 280px; /* 原来80px，增加以适应更大的logo */
+}
+
+.hero-slide {
+    background-size: cover !important;
+    background-position: center !important;
+    height: 80vh; /* 修改：增大高度为视口高度的80% */
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    position: relative; /* 添加相对定位 */
+}
+
+.hero-slide .container {
+    position: relative; /* 确保容器相对定位 */
+    z-index: 3; /* 确保内容在按钮上方 */
+    padding: 0 15px;
+    padding-bottom: 150px; /* 为底部按钮预留空间 */
+}
+
+.hero-slide h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+    animation: fadeInDown 1s ease;
+}
+
+.hero-slide p {
+    font-size: 20px;
+    margin-bottom: 40px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    animation: fadeInUp 1s ease;
+}
+
+.hero-slide .cta-buttons {
+    margin-top: 30px;
+    position: relative; /* 修改为相对定位 */
+    z-index: 5;
+}
+
+/* 轮播指示器样式 */
+.slick-dots {
+    bottom: 50px !important; /* 调整指示器位置 */
+    z-index: 5; /* 确保在内容上方 */
+}
+
+.slick-dots li button:before {
+    color: #fff !important;
+    font-size: 12px !important;
+    opacity: 0.5 !important;
+}
+
+.slick-dots li.slick-active button:before {
+    color: var(--secondary-color) !important;
+    opacity: 1 !important;
+}
+
+/* 轮播导航箭头 */
+.slick-prev,
+.slick-next {
+    width: 40px !important;
+    height: 40px !important;
+    z-index: 5 !important;
+}
+
+.slick-prev {
+    left: 20px !important;
+}
+
+.slick-next {
+    right: 20px !important;
+}
+
+.slick-prev:before,
+.slick-next:before {
+    font-size: 40px !important;
+}
+
+/* 联系我们和服务按钮样式 */
+.hero-action-buttons {
+    position: absolute; /* 改为绝对定位 */
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 4; /* 确保按钮位于轮播内容上方 */
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-action-buttons a {
+    display: block;
+    padding: 15px;
+    text-align: center;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.hero-action-buttons .contact-btn {
+    background-color: var(--primary-color);
+}
+
+.hero-action-buttons .services-btn {
+    background-color: var(--secondary-color);
+}
+
+.hero-action-buttons a:hover {
+    opacity: 0.9;
+}
+
+/* 关于我们区域 */
+.about-content {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.about-text {
+    flex: 1;
+}
+
+.about-image {
+    flex: 1;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* 服务区域 */
+.services {
+    background-color: var(--light-color);
+}
+
+.services h2 {
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.services h2:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: var(--secondary-color);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.service-card {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-left 0.3s ease;
+    border-left: 4px solid transparent;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid var(--secondary-color);
+}
+
+.service-icon {
+    font-size: 40px;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+}
+
+/* 项目区域 - 瀑布流布局 */
+.projects h2 {
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.projects h2:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: var(--secondary-color);
+}
+
+.waterfall-grid {
+    column-count: 3;
+    column-gap: 20px;
+}
+
+@media (max-width: 992px) {
+    .waterfall-grid {
+        column-count: 2;
+    }
+}
+
+@media (max-width: 576px) {
+    .waterfall-grid {
+        column-count: 1;
+    }
+}
+
+.project-card {
+    break-inside: avoid;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.project-info {
+    padding: 20px;
+    background-color: #fff;
+    border-bottom: 3px solid var(--primary-color);
+}
+
+.project-card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.5s ease;
+}
+
+.project-card:hover img {
+    transform: scale(1.05);
+}
+
+/* 图片覆盖层效果 */
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 80px); /* 减去信息区域高度 */
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(15, 76, 129, 0.7) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.project-card:hover::before {
+    opacity: 1;
+}
+
+/* 联系我们区域 */
+.contact {
+    background-color: var(--light-color);
+}
+
+.contact h2 {
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.contact h2:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: var(--secondary-color);
+}
+
+.contact-container {
+    display: flex;
+    gap: 50px;
+}
+
+@media (max-width: 768px) {
+    .contact-container {
+        flex-direction: column;
+    }
+}
+
+.contact-info {
+    flex: 1;
+}
+
+.contact-form {
+    flex: 2;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.info-item {
+    display: flex;
+    margin-bottom: 30px;
+    align-items: flex-start;
+}
+
+.info-item .icon {
+    font-size: 24px;
+    color: var(--secondary-color);
+    margin-right: 15px;
+    min-width: 30px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border: 1px solid var(--primary-color);
+    outline: none;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+/* 页脚区域 */
+footer {
+    background-color: #0a3257; /* 更深的蓝色，类似瑞尔物流 */
+    color: #fff;
+    padding-top: 60px;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.footer-logo {
+    flex: 1;
+    min-width: 250px;
+}
+
+.footer-logo img {
+    height: 300px; /* 原来60px的5倍 */
+    width: auto;
+    margin-bottom: 15px;
+    background: transparent;
+    filter: brightness(0) invert(1); /* 将SVG转为纯白色 */
+}
+
+.footer-links {
+    flex: 1;
+    min-width: 250px;
+}
+
+.footer-links ul li {
+    margin-bottom: 10px;
+}
+
+.footer-links ul li a {
+    color: #ddd;
+    transition: color 0.3s ease;
+}
+
+.footer-links ul li a:hover {
+    color: var(--secondary-color);
+}
+
+.footer-social {
+    flex: 1;
+    min-width: 250px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.social-icons a:hover {
+    background-color: var(--secondary-color);
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px 0;
+    text-align: center;
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 992px) {
+    .about-content {
+        flex-direction: column;
+    }
+    
+    .hero-slide h1 {
+        font-size: 36px;
+    }
+    
+    .hero-slide p {
+        font-size: 18px;
+    }
+    
+    .logo img {
+        height: 180px; /* 在平板设备上稍微缩小 */
+    }
+    
+    .hero-slider {
+        margin-top: 210px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    nav {
+        order: 3;
+        width: 100%;
+        margin-top: 15px;
+    }
+    
+    nav .menu {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    nav .menu li {
+        margin: 5px 10px;
+    }
+    
+    .logo img {
+        height: 150px; /* 在手机上进一步缩小 */
+    }
+    
+    .hero-slider {
+        margin-top: 260px;
+    }
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.project-card, .service-card {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+/* 数据统计区域 */
+.stats {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 60px 0;
+}
+
+.stats-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.stat-item {
+    text-align: center;
+    flex: 1;
+    min-width: 200px;
+}
+
+.stat-number {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--secondary-color);
+}
+
+.stat-label {
+    font-size: 18px;
+    font-weight: 500;
+} 
