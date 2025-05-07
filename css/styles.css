@@ -1,3 +1,4 @@
+
 /* 基础样式设置 */
 :root {
     --primary-color: #0f4c81;    /* 深蓝色作为主色调，与物流航运相关 */
@@ -101,8 +102,9 @@ header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px 15px; /* 减小上下内边距 */
+    padding: 5px 25px; /* 增加左右内边距，从15px增加到25px */
     flex-wrap: wrap;
+    max-width: 1300px; /* 增加最大宽度，从1200px增加到1300px */
 }
 
 .logo {
@@ -119,18 +121,22 @@ header .container {
 
 nav .menu {
     display: flex;
-    align-items: center; /* 确保垂直居中 */
-    height: 80px; /* 与logo高度一致 */
+    align-items: center;
+    height: 80px;
+    margin-left: 20px; /* 增加与logo的间距 */
 }
 
 nav .menu li {
-    margin-left: 25px;
+    margin-left: 35px; /* 增加菜单项之间的间距，从25px增加到35px */
 }
 
 nav .menu a {
     font-weight: 500;
-    padding: 10px 0;
+    font-size: 17px; /* 增加字体大小，从默认增加到17px */
+    padding: 12px 5px; /* 增加上下内边距，减少左右内边距 */
     position: relative;
+    letter-spacing: 0.5px; /* 增加字母间距 */
+    transition: color 0.3s ease;
 }
 
 nav .menu a:hover,
@@ -154,25 +160,34 @@ nav .menu a.active:after {
     width: 100%;
 }
 
+/* 语言切换按钮样式优化 */
 .language-switch {
     display: flex;
     align-items: center;
-    height: 80px; /* 与logo高度一致 */
+    height: 80px;
+    margin-left: 30px; /* 增加与菜单的间距 */
 }
 
 .language-switch button {
     background: none;
-    border: none;
+    border: 1px solid #eee; /* 添加轻微边框 */
     cursor: pointer;
     font-weight: 500;
-    padding: 5px 10px;
+    padding: 8px 15px; /* 增加内边距 */
     border-radius: 4px;
+    margin: 0 5px; /* 按钮之间的间距 */
+    font-size: 15px; /* 增加字体大小 */
     transition: all 0.3s ease;
 }
 
 .language-switch button.active {
     background-color: var(--primary-color);
     color: #fff;
+    border-color: var(--primary-color);
+}
+
+.language-switch button:hover:not(.active) {
+    background-color: #f5f5f5;
 }
 
 /* 英文和泰文语言切换 */
@@ -317,15 +332,19 @@ nav .menu a.active:after {
     opacity: 0.9;
 }
 
-/* 关于我们区域 */
+/* 关于我们区域样式优化 - 修复图片影响布局问题 */
 .about-content {
     display: flex;
-    align-items: center;
+    align-items: flex-start; /* 顶部对齐 */
     gap: 50px;
+    flex-wrap: nowrap; /* 防止换行 */
 }
 
 .about-text {
     flex: 1;
+    padding: 0;
+    margin: 0;
+    max-width: 50%; /* 限制文本区域宽度 */
 }
 
 .about-image {
@@ -333,6 +352,44 @@ nav .menu a.active:after {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    align-self: flex-start; /* 图片顶部对齐 */
+    max-width: 50%; /* 限制图片区域宽度 */
+    margin-top: 0; /* 确保图片没有顶部边距 */
+}
+
+.about-image img {
+    display: block; /* 消除图片底部间隙 */
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* 确保图片比例一致 */
+    max-height: 400px; /* 限制图片高度 */
+}
+
+/* 确保标题和文本紧密排列 */
+.about-text h2 {
+    margin-bottom: 15px !important;
+    padding-bottom: 0 !important;
+}
+
+.about-text p:first-of-type {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* 移除可能的浏览器默认样式影响 */
+h2, p {
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+/* 确保整个关于区域没有额外的内边距 */
+.about {
+    padding: 80px 0;
+    overflow: hidden; /* 防止溢出 */
+}
+
+.about .container {
+    overflow: visible; /* 确保内容可见 */
 }
 
 /* 服务区域 */
@@ -404,31 +461,34 @@ nav .menu a.active:after {
     background-color: var(--secondary-color);
 }
 
+/* 修改瀑布流为网格布局，确保卡片尺寸一致 */
 .waterfall-grid {
-    column-count: 3;
-    column-gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
 }
 
 @media (max-width: 992px) {
     .waterfall-grid {
-        column-count: 2;
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 576px) {
     .waterfall-grid {
-        column-count: 1;
+        grid-template-columns: 1fr;
     }
 }
 
 .project-card {
-    break-inside: avoid;
-    margin-bottom: 20px;
+    height: 350px; /* 固定卡片高度 */
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .project-card:hover {
@@ -436,21 +496,31 @@ nav .menu a.active:after {
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
-.project-info {
-    padding: 20px;
-    background-color: #fff;
-    border-bottom: 3px solid var(--primary-color);
+.project-card .image-container {
+    height: 250px; /* 固定图片容器高度 */
+    overflow: hidden;
+    position: relative;
 }
 
 .project-card img {
-    display: block;
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover; /* 确保图片填充整个容器且保持比例 */
     transition: transform 0.5s ease;
 }
 
 .project-card:hover img {
     transform: scale(1.05);
+}
+
+.project-info {
+    padding: 20px;
+    background-color: #fff;
+    border-bottom: 3px solid var(--primary-color);
+    flex-grow: 1; /* 让信息区域填充剩余空间 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 /* 图片覆盖层效果 */
@@ -460,7 +530,7 @@ nav .menu a.active:after {
     top: 0;
     left: 0;
     width: 100%;
-    height: calc(100% - 80px); /* 减去信息区域高度 */
+    height: 250px; /* 与图片容器高度一致 */
     background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(15, 76, 129, 0.7) 100%);
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -761,4 +831,306 @@ footer {
 
 .about, .services, .projects, .contact, .stats {
     padding: 80px 0;
-} 
+}
+
+/* 新增样式 - 关于我们和服务部分 */
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+    padding-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.section-title:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: var(--secondary-color);
+}
+
+.about-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 50px;
+    margin-top: 20px;
+}
+
+.about-text {
+    flex: 1;
+    max-width: 50%;
+}
+
+.about-text p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.about-list {
+    list-style: none;
+    margin: 15px 0;
+    padding-left: 0;
+}
+
+.about-list li {
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 0;
+    font-weight: 500;
+}
+
+.about-list li strong {
+    display: block;
+    color: var(--primary-color);
+}
+
+.about-image {
+    flex: 1;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 50%;
+}
+
+.about-image img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* 强调文本样式 */
+.highlight-text {
+    font-weight: 500;
+    color: var(--primary-color);
+    margin-top: 5px;
+    display: block;
+}
+
+/* 优势部分样式 */
+.strengths {
+    background-color: #f8f9fa;
+    padding: 80px 0;
+}
+
+.strengths-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.strength-card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.strength-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.strength-icon {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+}
+
+.strength-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.strength-card p {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+/* 服务部分样式优化 */
+.services {
+    padding: 80px 0;
+    background-color: var(--light-color);
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--dark-color);
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.section-title:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: var(--secondary-color);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.service-card {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.service-icon {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+}
+
+.service-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+.service-description {
+    flex-grow: 1;
+}
+
+.service-description p {
+    margin-bottom: 8px;
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+.service-description p strong {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* 响应式调整 */
+@media (max-width: 992px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .service-card {
+        padding: 20px;
+    }
+}
+
+/* 联系我们部分样式优化 */
+.contact {
+    background-color: #f8f9fa;
+    padding: 80px 0;
+}
+
+.contact-container {
+    display: flex;
+    gap: 50px;
+    margin-top: 40px;
+}
+
+.contact-info {
+    flex: 1;
+}
+
+.info-item {
+    display: flex;
+    margin-bottom: 25px;
+}
+
+.info-item .icon {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    margin-right: 15px;
+    min-width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(227, 108, 10, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-item .text h3 {
+    margin-bottom: 5px;
+    color: var(--primary-color);
+}
+
+.contact-form {
+    flex: 1;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--primary-color);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: inherit;
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+/* 响应式调整 */
+@media screen and (max-width: 992px) {
+    .about-content,
+    .contact-container {
+        flex-direction: column;
+    }
+    
+    .strengths-grid,
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .strengths-grid,
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+}
