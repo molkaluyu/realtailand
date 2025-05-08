@@ -86,7 +86,7 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.2;
 }
 
-/* 头部样式 */
+/* 头部布局重构 - 将LOGO单独作为容器 */
 header {
     background-color: #fff;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -95,35 +95,109 @@ header {
     left: 0;
     width: 100%;
     z-index: 1000;
-    padding: 5px 0; /* 减小上下内边距 */
+    padding: 0; /* 移除内边距 */
+    margin-bottom: 0; /* 移除下边距 */
+    height: 80px; /* 设置固定高度 */
 }
 
 header .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px 25px; /* 增加左右内边距，从15px增加到25px */
-    flex-wrap: wrap;
-    max-width: 1300px; /* 增加最大宽度，从1200px增加到1300px */
+    height: 100%;
+    max-width: 1300px;
+    padding: 0 25px;
+    position: relative; /* 为LOGO定位做准备 */
 }
 
 .logo {
+    position: absolute;
+    top: 0;
+    left: 25px;
+    height: 80px;
     display: flex;
     align-items: center;
 }
 
 .logo img {
-    height: 200px; /* 调整为合适的大小 */
+    height: 70px; /* 调整为合适的大小 */
     width: auto;
-    max-width: 100%;
-    background: transparent;
+    position: static; /* 移除绝对定位 */
+    top: auto;
+    left: auto;
+}
+
+nav {
+    margin-left: 150px; /* 为LOGO留出空间 */
+    flex: 1;
 }
 
 nav .menu {
     display: flex;
     align-items: center;
     height: 80px;
-    margin-left: 20px; /* 增加与logo的间距 */
+    padding: 0;
+    margin: 0;
+    justify-content: center; /* 菜单居中 */
+}
+
+.language-switch {
+    display: flex;
+    align-items: center;
+    height: 80px;
+    margin: 0;
+}
+
+/* 响应式调整 */
+@media screen and (max-width: 992px) {
+    nav {
+        margin-left: 120px; /* 减少空间 */
+    }
+    
+    .logo img {
+        height: 60px; /* 缩小LOGO */
+    }
+    
+    nav .menu li {
+        margin-left: 15px; /* 减少菜单项间距 */
+    }
+}
+
+@media screen and (max-width: 768px) {
+    header {
+        height: auto;
+        padding: 10px 0;
+    }
+    
+    header .container {
+        flex-direction: column;
+        padding: 10px 15px;
+    }
+    
+    .logo {
+        position: static;
+        margin-bottom: 10px;
+        height: auto;
+    }
+    
+    nav {
+        margin-left: 0;
+    }
+    
+    nav .menu {
+        height: auto;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .language-switch {
+        height: auto;
+        margin-top: 10px;
+    }
+    
+    .hero-slider {
+        margin-top: 150px; /* 调整轮播图位置 */
+    }
 }
 
 nav .menu li {
@@ -541,96 +615,6 @@ h2, p {
     opacity: 1;
 }
 
-/* 联系我们区域 */
-.contact {
-    background-color: var(--light-color);
-}
-
-.contact h2 {
-    text-align: center;
-    margin-bottom: 50px;
-    position: relative;
-    padding-bottom: 15px;
-}
-
-.contact h2:after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 3px;
-    background-color: var(--secondary-color);
-}
-
-.contact-container {
-    display: flex;
-    gap: 50px;
-}
-
-@media (max-width: 768px) {
-    .contact-container {
-        flex-direction: column;
-    }
-}
-
-.contact-info {
-    flex: 1;
-}
-
-.contact-form {
-    flex: 2;
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-}
-
-.info-item {
-    display: flex;
-    margin-bottom: 30px;
-    align-items: flex-start;
-}
-
-.info-item .icon {
-    font-size: 24px;
-    color: var(--secondary-color);
-    margin-right: 15px;
-    min-width: 30px;
-    text-align: center;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: 500;
-}
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-    transition: border 0.3s ease;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-    border: 1px solid var(--primary-color);
-    outline: none;
-}
-
-.form-group textarea {
-    resize: vertical;
-}
-
 /* 页脚区域 */
 footer {
     background-color: #0a3257; /* 更深的蓝色，类似瑞尔物流 */
@@ -639,28 +623,64 @@ footer {
 }
 
 .footer-content {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr; /* 保持四列布局 */
+    gap: 20px; /* 减小整体间距 */
     margin-bottom: 30px;
 }
 
+/* 调整logo部分宽度和位置 */
 .footer-logo {
-    flex: 1;
-    min-width: 250px;
+    grid-column: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-right: 20px; /* 添加右侧内边距 */
+}
+
+/* 调整三个主要部分的位置和宽度，使其更加均匀 */
+.footer-links {
+    grid-column: 2;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.footer-contact {
+    grid-column: 3;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.footer-social {
+    grid-column: 4;
+    padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.footer-bottom {
+    margin-top: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+/* 调整页脚标语位置 */
+.footer-tagline {
+    margin-top: 20px;
+    text-align: center;
+    width: 100%;
+    font-weight: 500;
+    font-size: 1.1rem;
 }
 
 .footer-logo img {
-    height: 300px; /* 原来60px的5倍 */
+    height: 120px; /* 从原来的300px减小到120px */
     width: auto;
     margin-bottom: 15px;
     background: transparent;
     filter: brightness(0) invert(1); /* 将SVG转为纯白色 */
-}
-
-.footer-links {
-    flex: 1;
-    min-width: 250px;
 }
 
 .footer-links ul li {
@@ -676,9 +696,36 @@ footer {
     color: var(--secondary-color);
 }
 
-.footer-social {
-    flex: 1;
-    min-width: 250px;
+.footer-contact h3 {
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.footer-contact ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-contact ul li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    color: #ddd;
+}
+
+.footer-contact ul li i {
+    color: var(--secondary-color);
+    margin-right: 10px;
+    min-width: 20px;
+    font-size: 16px;
+}
+
+.footer-contact ul li span {
+    font-size: 14px;
+    line-height: 1.5;
 }
 
 .social-icons {
@@ -702,12 +749,6 @@ footer {
     background-color: var(--secondary-color);
 }
 
-.footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 20px 0;
-    text-align: center;
-}
-
 /* 响应式设计 */
 @media screen and (max-width: 992px) {
     .about-content {
@@ -723,11 +764,11 @@ footer {
     }
     
     .logo img {
-        height: 180px; /* 在平板设备上稍微缩小 */
+        height: 140px; /* 在平板设备上稍微缩小 */
     }
     
     .hero-slider {
-        margin-top: 210px;
+        margin-top: 210px; /* 调整轮播图位置，避免被header遮挡 */
     }
 }
 
@@ -753,11 +794,11 @@ footer {
     }
     
     .logo img {
-        height: 150px; /* 在手机上进一步缩小 */
+        height: 120px; /* 在手机上进一步缩小 */
     }
     
     .hero-slider {
-        margin-top: 260px;
+        margin-top: 260px; /* 调整轮播图位置，避免被header遮挡 */
     }
 }
 
@@ -1132,5 +1173,293 @@ footer {
     .strengths-grid,
     .services-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+/* OMS系统部分 - 两栏布局样式 */
+.oms-section {
+    padding: 60px 0;
+    background-color: #f7f9fc;
+}
+
+.oms-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.oms-title {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 600;
+    color: #333333;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.oms-underline {
+    height: 3px;
+    width: 80px;
+    background-color: #e36c0a; /* 橙色下划线 */
+    margin: 0 auto 30px;
+}
+
+.oms-content-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 30px;
+}
+
+.oms-text-column {
+    flex: 1;
+    min-width: 300px;
+}
+
+.oms-image-column {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.oms-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.oms-subtitle {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333333;
+    margin-bottom: 15px;
+}
+
+.oms-description {
+    color: #555555;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.oms-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 25px 0;
+}
+
+.oms-features li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    color: #444444;
+}
+
+.oms-features li i {
+    color: #0f4c81; /* 蓝色图标 */
+    font-size: 18px;
+    margin-right: 15px;
+    min-width: 20px;
+    text-align: center;
+}
+
+.oms-button {
+    display: inline-block;
+    background-color: #0f4c81; /* 蓝色按钮 */
+    color: white;
+    padding: 12px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.oms-button:hover {
+    background-color: #0a3b65;
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 768px) {
+    .oms-container {
+        padding: 25px;
+    }
+    
+    .oms-title {
+        font-size: 24px;
+    }
+    
+    .oms-subtitle {
+        font-size: 18px;
+    }
+    
+    .oms-content-wrapper {
+        flex-direction: column-reverse; /* 在移动设备上图片显示在上方 */
+    }
+    
+    .oms-image-column {
+        margin-bottom: 20px;
+    }
+}
+
+/* 联系我们部分 - 重新设计（移除表单） */
+.contact {
+    background-color: #f7f9fc;
+    padding: 80px 0;
+}
+
+.contact .section-title {
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.contact .section-title:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: var(--secondary-color);
+}
+
+.contact-info-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.contact-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    padding: 40px;
+    transition: transform 0.3s ease;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+}
+
+.contact-info-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.contact-info-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.contact-icon {
+    margin-right: 20px;
+    min-width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(15, 76, 129, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-icon i {
+    font-size: 20px;
+    color: var(--primary-color);
+}
+
+.contact-details h3 {
+    margin-bottom: 10px;
+    color: var(--primary-color);
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.contact-details p {
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* 响应式调整 */
+@media screen and (max-width: 768px) {
+    .contact-card {
+        padding: 25px;
+    }
+    
+    .contact-info-item {
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+    }
+    
+    .contact-icon {
+        min-width: 40px;
+        height: 40px;
+    }
+    
+    .contact-icon i {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .footer-logo {
+        grid-column: 1;
+        grid-row: 1;
+    }
+    
+    .footer-links {
+        grid-column: 2;
+        grid-row: 1;
+    }
+    
+    .footer-contact {
+        grid-column: 1;
+        grid-row: 2;
+    }
+    
+    .footer-social {
+        grid-column: 2;
+        grid-row: 2;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-logo, .footer-links, .footer-contact, .footer-social {
+        grid-column: 1;
+    }
+    
+    .footer-logo {
+        grid-row: 1;
+    }
+    
+    .footer-links {
+        grid-row: 2;
+    }
+    
+    .footer-contact {
+        grid-row: 3;
+    }
+    
+    .footer-social {
+        grid-row: 4;
+        align-items: center;
     }
 }

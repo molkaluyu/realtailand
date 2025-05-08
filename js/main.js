@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // 确保语言切换功能能处理新添加的OMS部分
     // 获取语言切换按钮
     const enBtn = document.getElementById('en-btn');
     const thBtn = document.getElementById('th-btn');
@@ -53,9 +54,6 @@ document.addEventListener('DOMContentLoaded', function() {
         currentLanguage = 'en';
         // 保存语言偏好到localStorage
         localStorage.setItem('language', 'en');
-        
-        // 通知用户语言已切换
-        console.log('语言已切换为英文');
     }
     
     // 切换到泰文的函数
@@ -67,9 +65,6 @@ document.addEventListener('DOMContentLoaded', function() {
         currentLanguage = 'th';
         // 保存语言偏好到localStorage
         localStorage.setItem('language', 'th');
-        
-        // 通知用户语言已切换
-        console.log('语言已切换为泰文');
     }
     
     // 为英文按钮添加点击事件
@@ -192,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // 表单验证
             if (!formData.name || !formData.email || !formData.message) {
-                alert(currentLanguage === 'en' ? 'Please fill all required fields!' : 'กรุณากรอกข้อมูลที่จำเป็นทั้งหมด!');
+                alert(currentLanguage === 'en' ? 'Please fill all required fields!' : 'กรอกข้อมูลที่จำเป็น! ทั้งหมด!');
                 return;
             }
             
